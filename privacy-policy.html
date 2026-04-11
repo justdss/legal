@@ -7,11 +7,11 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #ffffff;
+      --bg: #c8c8c8;
       --text: #111111;
       --heading1: #111111;
       --heading2: #1a7a4a;
-      --card-bg: #f5f5f5;
+      --card-bg: #f0f0f0;
       --card-border: #e0e0e0;
       --link: #1a7a4a;
       --strong: #111111;
@@ -94,22 +94,39 @@
       margin-top: 6px;
     }
 
-    /* Toggle button */
-    .toggle-btn {
-      background: var(--toggle-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 20px;
-      padding: 6px 14px;
-      font-size: 14px;
-      cursor: pointer;
-      color: var(--text);
-      white-space: nowrap;
-      transition: background 0.3s;
+    /* Toggle switch */
+    .toggle-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
       flex-shrink: 0;
       margin-left: 16px;
       margin-top: 4px;
+      cursor: pointer;
     }
-    .toggle-btn:hover { opacity: 0.8; }
+    .toggle-icon { font-size: 16px; }
+    .toggle-track {
+      width: 44px;
+      height: 24px;
+      background: var(--toggle-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      position: relative;
+      transition: background 0.3s;
+    }
+    .toggle-thumb {
+      width: 18px;
+      height: 18px;
+      background: #4CC98A;
+      border-radius: 50%;
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      transition: transform 0.3s;
+    }
+    [data-theme="light"] .toggle-thumb {
+      transform: translateX(20px);
+    }
   </style>
 </head>
 <body data-theme="dark">
@@ -120,7 +137,10 @@
         <h1>Privacy Policy</h1>
         <div class="meta">Hachi &nbsp;·&nbsp; Last updated: April 2025</div>
       </div>
-      <button class="toggle-btn" onclick="toggleTheme()" id="toggleBtn">☀️ Light</button>
+      <div class="toggle-wrap" onclick="toggleTheme()">
+        <span class="toggle-icon" id="toggleIcon">☀️</span>
+        <div class="toggle-track"><div class="toggle-thumb"></div></div>
+      </div>
     </div>
 
     <p>This Privacy Policy applies to Hachi. We respect your privacy. Our application does not require user registration and does not collect personal data automatically.</p>
@@ -170,13 +190,13 @@
   <script>
     function toggleTheme() {
       const body = document.body;
-      const btn = document.getElementById('toggleBtn');
+      const icon = document.getElementById('toggleIcon');
       if (body.getAttribute('data-theme') === 'dark') {
         body.setAttribute('data-theme', 'light');
-        btn.textContent = '🌙 Dark';
+        icon.textContent = '🌙';
       } else {
         body.setAttribute('data-theme', 'dark');
-        btn.textContent = '☀️ Light';
+        icon.textContent = '☀️';
       }
     }
   </script>
